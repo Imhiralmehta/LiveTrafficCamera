@@ -1,0 +1,671 @@
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ontario highways live camera</title>
+	<link rel="stylesheet" href="css/Final.min.css" media="screen" />
+	<link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+   	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile.js"></script>
+    <script src="js/Chart.js"></script>    
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDpOV5y15VWljvlZ5rYMuMutwGMfjGLEJs"></script> 
+       
+	<!--Script to load google map on Burlington Camera page-->
+    <script>
+    function initialize() {
+      var bounds = new google.maps.LatLngBounds();
+      var map = new google.maps.Map(document.getElementById('map-canvas1'), 
+      {
+        zoom: 10,
+        center: {lat: 43.284453, lng: -79.787521},
+        zoomControl: true,
+        zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL},
+        mapTypeConrol: true,
+        mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                                mapTypeIds: [google.maps.MapTypeId.ROADMAP,google.maps.MapTypeId.SATELLITE]
+                                },
+        scaleControl: true,
+        streetViewControl: false, 
+        overviewMapControl: true,
+      });
+      var markers = [
+                      ['QEW at Burlington st', 43.258518,-79.767008,],
+                      ['QEW near Woodward av', 43.264956,-79.772243,],
+                      ['QEW near Eastport dr', 43.284453,-79.787521,],
+                      ['QEW near Burlington skyway - Hamilton', 43.294075,-79.793444,],
+                      ['QEW near Burlington skyway lift bridge', 43.301446,-79.797735,],
+                      ['QEW near Lake st', 43.175264,-79.246273,]
+                    ];
+        for( i = 0; i < markers.length; i++ ) {
+            var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+            bounds.extend(position);
+            marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: markers[i][0]
+            });
+            google.maps.event.trigger(map, 'resize');
+            map.fitBounds(bounds);		
+    }
+    }
+   google.maps.event.addDomListener(window, 'load', initialize);   
+    </script>
+     <!--Script to load google map on Niagara Camera page-->
+    <script>
+    function initialize() {
+      var bounds = new google.maps.LatLngBounds();
+      var map = new google.maps.Map(document.getElementById('map-canvas2'), 
+      {
+        zoom: 10,
+        center: {lat: 43.258518, lng: -79.767008},
+        zoomControl: true,
+        zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL},
+        mapTypeConrol: true,
+        mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                                mapTypeIds: [google.maps.MapTypeId.ROADMAP,google.maps.MapTypeId.SATELLITE]
+                                },
+        scaleControl: true,
+        streetViewControl: false, 
+        overviewMapControl: true,
+      });
+      var markers = [
+                      ['QEW at Ontario st', 43.180521,-79.267473,],
+                      ['QEW near Lake st', 43.175264,-79.246273,],
+                      ['QEW near Niagara st', 43.179390,-79.309240,],
+                      ['406 N/B ramp to Toronto', 43.178030,-79.285300,]	  
+                    ];
+        for( i = 0; i < markers.length; i++ ) {
+            var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+            bounds.extend(position);
+            marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: markers[i][0]
+            });
+            google.maps.event.trigger(map, 'resize');
+            map.fitBounds(bounds);		
+    }
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);   
+    </script>
+
+</body>
+     
+     <!--Custom script to fetch data from XML file-->
+    <script src="js/myscript1.js"></script>    
+</head>
+<body>
+
+<!-- Start of first page: #home -->
+<div data-role="page" id="home" data-theme="a">
+<!--Header-->
+	<header data-role="header">
+		<h3 class="ui-title" id="header"></h3>
+	</header>
+<!--Content-->
+	<section class="ui-content" role="main">
+    <p id="imgIcon" align="center"></p>
+    <p align="center" style="font-size:1em;font-weight:bold;border:solid 2px black;">This is a mobile app to show live traffic cameras on highway 401 & QEW in GTA and Niagara region.<br> It has used Ministry of Transportation's traffic camera API and google map API.<br> From this screen you can choose area and from next screen you can choose exact location to see the camera.</p>
+	<div data-role="collapsible-set">
+      <div data-role="collapsible">
+        <h3>Select Area</h3>
+        <ul data-role="listview">
+        <li><a href="#gta"><span class="m1"></span></a></li>
+        <li><a href="#burl"><span class="m2"></span></a></li>
+        <li><a href="#niagara"><span class="m3"></span></a></li>
+        </ul>        
+      </div>	    
+      </div>
+      
+    <img src="finalimage.jpg" alt="live camera image" style="animation:ease-in; margin-left:10%;"/> 
+    </section>
+     <!--footer-->
+		<div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>							
+                </ul>
+			</div>
+		</div>
+</div>
+
+<!-- Start of GTA page -->
+<div data-role="page" id="gta" data-theme="b">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>GTA Cameras</h3>
+        <a href="#home" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Home</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+    <img src="camera.png" width="75" height="75" alt="camera icon"/>
+	<div data-role="collapsible-set">
+      	<div data-role="collapsible">
+          <h3>Select Intersection</h3>
+          	<ul data-role="listview">
+            <li><a href="#gta1"><span class="n1"></span></a></li>
+            <li><a href="#gta2"><span class="n2"></span></a></li>
+            <li><a href="#gta3"><span class="n3"></span></a></li>
+            </ul>    	
+      	</div>	    
+     </div>    
+    <div id="map-canvas"></div>
+    </section>	
+    <!--footer-->
+    <div data-role='footer'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of GTA page -->
+<!-- Start of Burlington page -->
+<div data-role="page" id="burl" data-theme="b">
+<!--Header-->
+	<header data-role="header">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>Burlington/Mississauga Cameras</h3>
+        <a href="#home" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Home</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+    <img src="camera.png" width="75" height="75" alt="camera icon"/>
+		<div data-role="collapsible-set">
+      	<div data-role="collapsible">
+      		<h3>Select Intersection</h3>
+      		<ul data-role="listview">
+            <li><a href="#burl1"><span class="o1"></span></a></li>
+            <li><a href="#burl2"><span class="o2"></span></a></li>
+            <li><a href="#burl3"><span class="o3"></span></a></li>
+            <li><a href="#burl4"><span class="o4"></span></a></li>
+            <li><a href="#burl5"><span class="o5"></span></a></li>
+            <li><a href="#burl6"><span class="o6"></span></a></li>
+           </ul>   
+      </div>	    
+      </div>
+     
+   <div id="map-canvas1"></div> 
+    </section>
+<!--footer-->	
+    <div data-role='footer'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Burlington page -->
+<!-- Start of Niagara page -->
+<div data-role="page" id="niagara" data-theme="b">
+<!--Header-->
+	<header data-role="header">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>Niagara Cameras</h3>
+        <a href="#home" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Home</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+    <img src="camera.png" width="75" height="75" alt="camera icon"/>
+		<div data-role="collapsible-set">
+      	<div data-role="collapsible">
+      		<h3>Select Intersection</h3>
+      		<ul data-role="listview">
+            <li><a href="#nia1"><span class="q1"></span></a></li>
+            <li><a href="#nia2"><span class="q2"></span></a></li>
+            <li><a href="#nia3"><span class="q3"></span></a></li>
+            <li><a href="#nia4"><span class="q4"></span></a></a></li>
+        	</ul>
+      </div>	    
+      </div>
+    <div id="map-canvas2"></div> 
+    </section>
+<!--footer-->	
+    <div data-role='footer'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Niagara page -->
+<!-- Start of GTA1 page -->
+<div data-role="page" id="gta1" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>GTA - 401 near Harwood Camera</h3>
+        <a href="#gta" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">GTA</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imggta1"></div>
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>   
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of GTA1 page -->
+<!-- Start of GTA2 page -->
+<div data-role="page" id="gta2" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>GTA - 401 near Westney Camera</h3>
+        <a href="#gta" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">GTA</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imggta2"></div>
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>   
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of GTA2 page -->
+<!-- Start of GTA3 page -->
+<div data-role="page" id="gta3" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>GTA - 401 near Church Camera</h3>
+        <a href="#gta" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">GTA</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imggta3"></div>
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>   
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of GTA3 page -->
+<!-- Start of Burlington1 page -->
+<div data-role="page" id="burl1" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>QEW near Burlington st Camera</h3>
+        <a href="#burl" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Burlington</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgburl1"></div>   
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Burlington1 page -->
+<!-- Start of Burlington2 page -->
+<div data-role="page" id="burl2" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>QEW near Woodward Camera</h3>
+        <a href="#burl" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Burlington</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgburl2"></div>
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>   
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Burlington2 page -->
+<!-- Start of Burlington3 page -->
+<div data-role="page" id="burl3" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>QEW near Eastport Camera</h3>
+        <a href="#burl" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Burlington</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgburl3"></div>   
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Burlington3 page -->
+<!-- Start of Burlington4 page -->
+<div data-role="page" id="burl4" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>QEW near Hamilton side skyway Camera</h3>
+        <a href="#burl" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Burlington</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgburl4"></div>
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>   
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Burlington4 page -->
+<!-- Start of Burlington5 page -->
+<div data-role="page" id="burl5" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>QEW near skyway at liftbridge Camera</h3>
+        <a href="#burl" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Burlington</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgburl5"></div> 
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>  
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Burlington5 page -->
+<!-- Start of Burlington6 page -->
+<div data-role="page" id="burl6" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>QEW near Lake st Camera</h3>
+        <a href="#burl" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Burlington</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgburl6"></div>  
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div> 
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Burlington6 page -->
+<!-- Start of Niagara1 page -->
+<div data-role="page" id="nia1" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>Niagara QEW at Ontario st Camera</h3>
+        <a href="#niagara" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Niagara</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgnia1"></div> 
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>  
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Niagara1 page -->
+<!-- Start of Niagara2 page -->
+<div data-role="page" id="nia2" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>Niagara QEW at Lake st Camera</h3>
+        <a href="#niagara" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Niagara</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgnia2"></div>  
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div> 
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Niagara2 page -->
+<!-- Start of Niagara3 page -->
+<div data-role="page" id="nia3" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>Niagara QEW at Niagara st Camera</h3>
+        <a href="#niagara" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Niagara</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgnia3"></div>
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>   
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Niagara3 page -->
+<!-- Start of Niagara4 page -->
+<div data-role="page" id="nia4" data-theme="c">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+		<a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		<h3>Niagara 406 N/B to Toronto ramp Camera</h3>
+        <a href="#niagara" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Niagara</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<div id="imgnia4"></div>   
+        <div class="imgnotify">This is live traffic camera view.<br>It is not being auto-refreshed but updated every 10-15 mins.</div>
+    </section>
+<!--footer-->	
+    <div data-role='footer' data-position='fixed'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Niagara4 page -->
+<!-- Start of Graph page -->
+<div data-role="page" id="graph" data-theme="d">
+<!--Header-->
+	<header data-role="header" data-position="fixed">
+    <a href="#home" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+	  <h3>Area wise traffic cameras</h3>
+      <a href="#home" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all">Home</a>
+	</header>
+<!--Content-->
+    <section class="ui-content" role="main">
+   		<canvas id="myCanvas"></canvas>
+
+    </section>
+<!--footer-->	
+    <div data-role='footer'>
+			<div data-role='navbar'>
+				<ul>
+                    <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+                    <li><a href="#gta" class="ui-btn ui-icon-camera ui-btn-icon-top" >GTA</a></li>
+                    <li><a href="#burl" class="ui-btn ui-icon-camera ui-btn-icon-top">Burlington/Mississauga</a></li>
+                    <li><a href="#niagara" class="ui-btn ui-icon-camera ui-btn-icon-top">Niagara</a></li>
+                    <li><a href="#graph" class="ui-btn ui-icon-location ui-btn-icon-top">Graph</a></li>						
+                </ul>
+			</div>
+		</div>
+</div>
+<!-- End of Graph page -->
+<!--Script to load google map on GTA Camera page-->
+<script>
+    function initialize() {
+      var bounds = new google.maps.LatLngBounds();
+      var map = new google.maps.Map(document.getElementById('map-canvas'), 
+      {
+        zoom: 10,
+        center: {lat: 43.657134, lng: -79.741179},
+        zoomControl: true,
+        zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL},
+        mapTypeConrol: true,
+        mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                                mapTypeIds: [google.maps.MapTypeId.ROADMAP,google.maps.MapTypeId.SATELLITE]
+                                },
+        scaleControl: true,
+        streetViewControl: false, 
+        overviewMapControl: true,
+      });
+      var markers = [
+                      ['401 at Harwood', 43.852169,-79.022083,],
+                      ['401 at Westney', 43.848084,-79.040623,],
+                      ['401 at Church', 43.845794,-79.052296,]
+                    ];
+        for( i = 0; i < markers.length; i++ ) {
+            var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+            bounds.extend(position);
+            marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: markers[i][0]
+            });
+            //google.maps.event.trigger(map, 'resize');
+            map.fitBounds(bounds);		
+    }
+    }
+	$(document).on('pageshow', '#gta', function(e, data){       
+                initialize();
+            });    
+    </script>
+    
+</html>

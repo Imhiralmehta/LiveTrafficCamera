@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+   <Document>
+      <name>MTO COMPASS Traffic Cameras</name>
+      <description>Ministry of Transportation COMPASS Traffic Cameras</description>
+      <Style id="camerastyle">
+         <IconStyle>
+            <scale>0.9</scale>
+            <Icon>
+               <href>http://www.mto.gov.on.ca/graphics/english/traveller/trip/icon-camera-20x20.png?31235</href>
+            </Icon>
+            <hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction" />
+         </IconStyle>
+      </Style>
+      <Folder>
+         <name>GTA</name>
+         <description />
+         <Placemark>
+            <name />
+            <description>401 near Harwood Ave
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/loc103.jpg?1438106707" alt="401 near Harwood Ave" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.022083,43.852169</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>401 near Westney Rd
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/loc102.jpg?1438106707" alt="401 near Westney Rd" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.040623,43.848084</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>401 near Church St
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/loc101.jpg?1438106707" alt="401 near Church St" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.052296,43.845794</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+      </Folder>
+      <Folder>
+         <name>Burlington/Mississauga</name>
+         <description />
+         <Placemark>
+            <name />
+            <description>QEW near Burlington St
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc01.jpg?1438106707" alt="QEW near Burlington St" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.767008,43.258518</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>QEW near Woodward Ave
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc02.jpg?1438106707" alt="QEW near Woodward Ave" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.772243,43.264956</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>QEW near Eastport Dr
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc03.jpg?1438106707" alt="QEW near Eastport Dr" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.787521,43.284453</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>QEW Burlington Skyway - Hamilton
+					<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc04.jpg?1438106707" alt="QEW Burlington Skyway - Hamilton" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.793444,43.294075</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>QEW Burlington Skyway near lift bridge
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc05.jpg?1438106707" alt="QEW Burlington Skyway near lift bridge" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.797735,43.301446</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>QEW near Lake St St
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc89.jpg?1438106707" alt="QEW near Lake St St" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.246273,43.175264</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         
+      </Folder>
+      <Folder>
+         <name>Niagara</name>
+         <description />
+         <Placemark>
+            <name />
+            <description>QEW near Ontario St
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc88.jpg?1438106707" alt="QEW near Ontario St" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.267473,43.180521</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>QEW near Lake St St
+				<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc89.jpg?1438106707" alt="QEW near Lake St St" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.246273,43.175264</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>QEW near Niagara St - East side of Overpass
+					<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc90.jpg?1438106707" alt="QEW near Niagara St - East side of Overpass" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.309240,43.179390</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+         <Placemark>
+            <name />
+            <description>406 N/B ramp to Toronto
+			<img id="cameraIMG" src="http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc85.jpg?1438106707" alt="406 N/B ramp to Toronto" style="width: 320px;height: 240px;border: 1px solid #000;" width="320" height="240" />
+			</description>
+            <Point>
+               <coordinates>-79.285300,43.178030</coordinates>
+            </Point>
+            <styleUrl>#camerastyle</styleUrl>
+         </Placemark>
+      </Folder>
+   </Document>
+</kml>
